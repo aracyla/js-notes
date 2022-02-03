@@ -8,6 +8,22 @@ export default {
     argTypes: {
         color: {
             options: ['', 'primary', 'link', 'info', 'success', 'warning', 'danger', 'white', 'light', 'dark', 'black', 'text', 'ghost']
+        },
+        size: {
+            options: ['small', 'normal', 'medium', 'large'],
+            control: { type: 'select'},
+        },
+        isLight: {
+            options: [true, false],
+        },
+        isFullWidth: {
+            options: [true, false],
+        },
+        isOutlined: {
+            options: [true, false],
+        },
+        onClick: {
+            action: 'clicked',
         }
     }
 } as ComponentMeta<typeof Button>;
