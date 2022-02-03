@@ -1,0 +1,7 @@
+/*
+    To rewrite bulma default color just set variables before importing anything(example below)
+
+    $primary: red;
+*/
+@import 'bulma/sass/utilities/_all.sass';
+@import 'bulma/sass/elements/button.sass';
