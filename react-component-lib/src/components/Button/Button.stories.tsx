@@ -15,12 +15,19 @@ export default {
         },
         isLight: {
             options: [true, false],
+            control: {type: 'boolean'}
         },
         isFullWidth: {
             options: [true, false],
+            control: {type: 'boolean'}
         },
         isOutlined: {
             options: [true, false],
+            control: {type: 'boolean'}
+        },
+        disabled: {
+            options: [true, false],
+            control: {type: 'boolean'}
         },
         onClick: {
             action: 'clicked',
