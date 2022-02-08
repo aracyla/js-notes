@@ -10,9 +10,6 @@ export default {
             options: ['small', 'normal', 'medium', 'large'],
             control: { type: 'select'},
         },
-        label: {
-            constrol: { type: 'text'},
-        },
         name: {
             defaultValue: 'delete'
         }
