@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import Icon from './index';
 
 export default {
-    title: 'Icon Styles',
+    title: 'Icon',
     component: Icon,
     argTypes: {
         size: {

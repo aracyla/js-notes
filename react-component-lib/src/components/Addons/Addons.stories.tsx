@@ -4,7 +4,7 @@ import Addons from './index';
 import Button from '../Button';
 
 export default {
-    title: 'Addons Styles',
+    title: 'Addons',
     component: Addons,
 } as ComponentMeta<typeof Addons>;
 
