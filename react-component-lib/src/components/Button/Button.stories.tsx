@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import Button from './index';
+import Icon from '../Icon';
 
 export default {
     title: 'Button Styles',
@@ -37,4 +38,11 @@ export default {
 
 export const Examples: ComponentStory<typeof Button> = (args) => (
     <Button {...args}>Button</Button>
+);
+
+export const ButtonWithIcon: ComponentStory<typeof Button> = (args) => (
+    <Button {...args}>
+        <Icon name="delete" />
+        <span>Button Text</span>
+    </Button>
 );
