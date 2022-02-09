@@ -26,6 +26,10 @@ export default {
             options: [true, false],
             control: {type: 'boolean'}
         },
+        isRounded: {
+            options: [true, false],
+            control: {type: 'boolean'}
+        },
         disabled: {
             options: [true, false],
             control: {type: 'boolean'}
@@ -40,7 +44,7 @@ export const Examples: ComponentStory<typeof Button> = (args) => (
     <Button {...args}>Button</Button>
 );
 
-export const ButtonWithIcon: ComponentStory<typeof Button> = (args) => (
+export const ExampleWithIcon: ComponentStory<typeof Button> = (args) => (
     <Button {...args}>
         <Icon name="delete" />
         <span>Button Text</span>
