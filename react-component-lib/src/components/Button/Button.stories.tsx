@@ -4,7 +4,7 @@ import Button from './index';
 import Icon from '../Icon';
 
 export default {
-    title: 'Button Styles',
+    title: 'Button',
     component: Button,
     argTypes: {
         color: {
