@@ -4,7 +4,7 @@ interface IAddons {
 
 const Addons: React.FC<IAddons> = ({ items, ...rest }) => {
     return (
-        <div className="field has-addons">
+        <div className="field has-addons" {...rest}>
             {items.map((item) => {
                 return (
                     <p className="control">
