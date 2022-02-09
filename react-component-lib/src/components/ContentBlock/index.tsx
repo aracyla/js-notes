@@ -1,6 +1,6 @@
 const ContentBlock: React.FC = ({ children, ...rest }) => {
     return (
-        <div className="block">
+        <div className="block" {...rest}>
             {children}
         </div>
     );
