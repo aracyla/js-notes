@@ -5,4 +5,10 @@
 */
 @import 'bulma/sass/utilities/_all.sass';
 @import 'bulma/sass/base/_all.sass';
+
+//form 
+@import 'bulma/sass/form/shared.sass';
+@import 'bulma/sass/form/tools.sass';
+
+//buttons
 @import 'bulma/sass/elements/button.sass';
