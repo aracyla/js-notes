@@ -5,19 +5,33 @@ const Test: React.FC = () => {
 
     const c = () => {
         showNotification({
-            c: (
+            notificationContent: (
                 <Notification>
                     teste
                 </Notification>
+            )
+        });
+    }
+    const d = () => {
+        showNotification({
+            notificationContent: (
+                <Notification color="danger">
+                    teste
+                </Notification>
             ),
-            duration: 3000,
+            duration: 10000,
         });
     }
 
     return (
-        <div onClick={() => c()}>
-            Vrau
-        </div>
+        <>
+            <div onClick={() => c()}>
+                Vrau
+            </div>
+            <div onClick={() => d()}>
+                Longer Vrau
+            </div>
+        </>
    );
 };
 
