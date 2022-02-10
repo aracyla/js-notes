@@ -8,11 +8,13 @@ export default {
     argTypes: {
         color: {
             options: ['', 'primary', 'link', 'info', 'success', 'warning', 'danger', 'white', 'light', 'dark', 'black', 'text', 'ghost'],
-            defaultValue: 'success'
+            defaultValue: 'success',
+            description: 'Notification box color.',
         },
         isLight: {
             options: [ true, false ],
             control: { type: 'boolean' },
+            description: 'Notification box is light.',
         },
     }
 } as ComponentMeta<typeof Notification>;

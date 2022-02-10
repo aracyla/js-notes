@@ -7,16 +7,19 @@ export default {
     component: Tag,
     argTypes: {
         color: {
-            options: ['', 'primary', 'link', 'info', 'success', 'warning', 'danger', 'white', 'light', 'dark', 'black', 'text', 'ghost']
+            options: ['', 'primary', 'link', 'info', 'success', 'warning', 'danger', 'white', 'light', 'dark', 'black', 'text', 'ghost'],
+            description: 'Tag color',
         },
         size: {
             options: ['small', 'normal', 'medium', 'large'],
             control: { type: 'select'},
+            description: 'Tag size',
         },
         isRounded: {
             options: [true, false],
-            contorl: { type: 'boolean'},
-        }
+            control: { type: 'boolean'},
+            description: 'Tag has round border',
+        },
     }
 } as ComponentMeta<typeof Tag>;
 

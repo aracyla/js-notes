@@ -8,34 +8,42 @@ export default {
     component: Button,
     argTypes: {
         color: {
-            options: ['', 'primary', 'link', 'info', 'success', 'warning', 'danger', 'white', 'light', 'dark', 'black', 'text', 'ghost']
+            options: ['', 'primary', 'link', 'info', 'success', 'warning', 'danger', 'white', 'light', 'dark', 'black', 'text', 'ghost'],
+            description: 'Button color.'
         },
         size: {
             options: ['small', 'normal', 'medium', 'large'],
             control: { type: 'select'},
+            description: 'Button size',
         },
         isLight: {
             options: [true, false],
-            control: {type: 'boolean'}
+            control: {type: 'boolean'},
+            description: 'Button is light.'
         },
         isFullWidth: {
             options: [true, false],
-            control: {type: 'boolean'}
+            control: {type: 'boolean'},
+            description: 'Button has full width of its container.',
         },
         isOutlined: {
             options: [true, false],
-            control: {type: 'boolean'}
+            control: {type: 'boolean'},
+            description: 'Button is outlined.',
         },
         isRounded: {
             options: [true, false],
-            control: {type: 'boolean'}
+            control: {type: 'boolean'},
+            description: 'Button has round borders.'
         },
         disabled: {
             options: [true, false],
-            control: {type: 'boolean'}
+            control: {type: 'boolean'},
+            description: 'Button is disabled.'
         },
         onClick: {
             action: 'clicked',
+            description: 'Click event',
         }
     }
 } as ComponentMeta<typeof Button>;

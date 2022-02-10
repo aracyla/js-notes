@@ -9,9 +9,11 @@ export default {
         size: {
             options: ['small', 'normal', 'medium', 'large'],
             control: { type: 'select'},
+            description: 'Icon size',
         },
         name: {
-            defaultValue: 'delete'
+            defaultValue: 'delete',
+            description: 'Icon name',
         }
     },
 } as ComponentMeta<typeof Icon>;
