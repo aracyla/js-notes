@@ -3,13 +3,11 @@ import classNames from 'classnames/bind';
 import { ThemeColors } from 'theme';
 
 interface INotification {
-    duration?: number;
     color?: ThemeColors;
     isLight?: boolean;
 }
 
 const Notification: React.FC<INotification> = ({
-    duration = 3000,
     color = 'success',
     isLight = false,
     children,
@@ -30,3 +28,4 @@ const Notification: React.FC<INotification> = ({
 };
 
 export default Notification;
+export * from './NotificationUtils';
