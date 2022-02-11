@@ -1,29 +1,57 @@
 import { createContext, useState, useContext, useEffect } from 'react';
 
+import Notification from './index';
 import { ThemeColors } from 'theme';
+
+import './index.scss';
 
 //Provider and context
 const NotificationCtx = createContext<any>({});
 type NotificationData = {
-    [id: string]: JSX.Element | string;
+    id: string;
+    notificationContent: JSX.Element | string;
+    color: ThemeColors;
+    isLight: boolean;
 }
 
-const NotificationRender: React.FC<{notifications: NotificationData | null}> = ({ notifications }) => {
+const NotificationRender: React.FC<{notifications: NotificationData[]}> = ({ notifications }) => {
+    const [_notifications, _setNotifications] = useState<NotificationData[]>([]);
+    const [leaveAnimation, setLeaveAnimation] = useState<{[id: string]: string}>({
+        '': '',
+    });
+
+    useEffect(() => {
+        if(notifications.length > _notifications.length) {
+            _setNotifications(notifications);
+        }
+        else {
+            if(_notifications.length > 0) {
+                const n = _notifications.filter((x) => !notifications.map(y => y.id).includes(x.id));
+                setLeaveAnimation({[n[0].id]: 'animate__bounceOut'});
+                setTimeout(() => _setNotifications(notifications), 550);
+            }
+        }
+    }, [notifications]);
+
     return (
-        <>
-            {Object.values(notifications || {}).map((n, index) => {
+        <div className="_notification">
+            {([..._notifications].reverse()).map((n) => {
                 return (
-                    <div key={index}>
-                        {n}
+                    <div className={leaveAnimation[n.id] || 'animate__bounceIn'} key={n.id}>
+                        <Notification
+                            color={n.color} 
+                            isLight={n.isLight}>
+                            {n.notificationContent}
+                        </Notification>
                     </div>
-                )
+                );
             })}
-        </>
+        </div>
     );
 };
 
 export const NotificationProvider: React.FC = ({ children }) => {
-    const [activeNotifications, setActiveNotifications] = useState<NotificationData | null>(null);
+    const [activeNotifications, setActiveNotifications] = useState<NotificationData[]>([]);
     return (
         <NotificationCtx.Provider value={{activeNotifications, setActiveNotifications}}>
             <NotificationRender notifications={activeNotifications} />
@@ -31,6 +59,7 @@ export const NotificationProvider: React.FC = ({ children }) => {
         </NotificationCtx.Provider>
     );
 };
+
 
 // hook
 type NotificationConfig = {
@@ -50,18 +79,9 @@ export const useNotification = (): IUseNotification => {
 
     useEffect(() => {
         if(idToRemove) {
-            const _activeNotifications = Object.entries(activeNotifications).reduce((acc, cur) => {
-                const [key, value] = cur;
-                if(idToRemove === key)
-                    return {
-                        ...acc,
-                    }
-                return {
-                    ...acc,
-                    [key]: value,
-                }
-            }, {});
-            setActiveNotifications(_activeNotifications);
+            setActiveNotifications(
+                activeNotifications.filter((x: any) => x.id !== idToRemove),
+            );
         }
     }, [idToRemove]);
 
@@ -78,10 +98,15 @@ export const useNotification = (): IUseNotification => {
             isLight = false,
         }: NotificationConfig) => {
         const notificationId = (Date.now()).toString();
-        setActiveNotifications({
+        setActiveNotifications([
             ...(activeNotifications),
-            [notificationId]: notificationContent,
-        });
+            {
+                id: notificationId,
+                notificationContent,
+                color,
+                isLight,
+            },
+        ]);
         _setRemoveNotificationTimer(notificationId, duration);
     };
 

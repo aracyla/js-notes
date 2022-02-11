@@ -5,21 +5,15 @@ const Test: React.FC = () => {
 
     const c = () => {
         showNotification({
-            notificationContent: (
-                <Notification>
-                    teste
-                </Notification>
-            )
+            notificationContent: `${Date.now()} + vrau D`,
+            color: 'warning',
         });
     }
     const d = () => {
         showNotification({
-            notificationContent: (
-                <Notification color="danger">
-                    teste
-                </Notification>
-            ),
-            duration: 10000,
+            notificationContent: `${Date.now()} + vrau D`,
+            color: 'danger',
+            duration: 6000,
         });
     }
 
