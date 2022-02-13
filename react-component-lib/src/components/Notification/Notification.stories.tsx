@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import Notification from './index';
+import Notification, { useNotification, NotificationProvider } from './index';
 
 export default {
     title: 'Notification',
@@ -15,12 +15,33 @@ export default {
             options: [ true, false ],
             control: { type: 'boolean' },
             description: 'Notification box is light.',
+            defaultValue: false,
         },
+        duration: {
+            description: 'Notification duration',
+            defaultValue: 3000,
+        }
     }
-} as ComponentMeta<typeof Notification>;
+} as ComponentMeta<React.FC>;
 
-export const Examples: ComponentStory<typeof Notification> = (args) => (
-    <Notification {...args}>
-        This is a text inside notification
-    </Notification>
+const NotificationExample: React.FC<any> = ({args}) => {
+    const { showNotification } = useNotification();
+    return (
+        <div onClick={() => {
+            showNotification({
+                notificationContent: 'text',
+                color: args.color,
+                duration: args.duration,
+                isLight: args.isLight,
+            });
+        }}>
+            click to display notification(check story implementation to see how to use useNotification hook :))
+        </div>
+    )
+};
+
+export const Examples: ComponentStory<React.FC> = (args) => (
+    <NotificationProvider>
+        <NotificationExample args={args} />
+    </NotificationProvider>
 );

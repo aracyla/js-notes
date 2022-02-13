@@ -14,7 +14,7 @@ const Notification: React.FC<INotification> = ({
     ...rest
 }) => {
     const notificationClasses = classNames({
-        'notification': true,
+        'notification is-clickable': true,
         [`is-${color}`]: color,
         'is-light': isLight,
     });

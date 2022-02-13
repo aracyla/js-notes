@@ -1,4 +1,5 @@
 import 'theme/styles/main.scss';
+import 'animate.css';
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
