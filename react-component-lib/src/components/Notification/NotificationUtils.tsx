@@ -12,9 +12,9 @@ type NotificationData = {
     notificationContent: JSX.Element | string;
     color: ThemeColors;
     isLight: boolean;
-}
+};
 
-const NotificationRender: React.FC<{notifications: NotificationData[]}> = ({ notifications }) => {
+const NotificationRender: React.FC<{notifications: NotificationData[], setNotifications: (n: NotificationData[]) => void }> = ({ notifications, setNotifications }) => {
     const [_notifications, _setNotifications] = useState<NotificationData[]>([]);
     const [leaveAnimation, setLeaveAnimation] = useState<{[id: string]: string}>({
         '': '',
@@ -27,17 +27,27 @@ const NotificationRender: React.FC<{notifications: NotificationData[]}> = ({ not
         else {
             if(_notifications.length > 0) {
                 const n = _notifications.filter((x) => !notifications.map(y => y.id).includes(x.id));
-                setLeaveAnimation({[n[0].id]: 'animate__bounceOut'});
-                setTimeout(() => _setNotifications(notifications), 550);
+                if(n.length > 0) {
+                    setLeaveAnimation({[n[0].id]: 'animate__bounceOut'});
+                    setTimeout(() => _setNotifications(notifications), 550);
+                }
             }
         }
     }, [notifications]);
+
+    const onRemoveNotification = (id: string) => {
+        setNotifications(
+            notifications.filter((x: any) => x.id !== id)
+        );
+    };
 
     return (
         <div className="_notification">
             {([..._notifications].reverse()).map((n) => {
                 return (
-                    <div className={leaveAnimation[n.id] || 'animate__bounceIn'} key={n.id}>
+                    <div className={leaveAnimation[n.id] || 'animate__bounceIn'} 
+                        onClick={() => onRemoveNotification(n.id)}
+                        key={n.id}>
                         <Notification
                             color={n.color} 
                             isLight={n.isLight}>
@@ -54,7 +64,9 @@ export const NotificationProvider: React.FC = ({ children }) => {
     const [activeNotifications, setActiveNotifications] = useState<NotificationData[]>([]);
     return (
         <NotificationCtx.Provider value={{activeNotifications, setActiveNotifications}}>
-            <NotificationRender notifications={activeNotifications} />
+            <NotificationRender 
+                notifications={activeNotifications}
+                setNotifications={(n: NotificationData[]) => setActiveNotifications(n)}/>
             {children}
         </NotificationCtx.Provider>
     );
@@ -67,11 +79,11 @@ type NotificationConfig = {
     duration?: number;
     color?: ThemeColors;
     isLight?: boolean;
-}
+};
 
 interface IUseNotification {
     showNotification: (config: NotificationConfig) => void;
-}
+};
 
 export const useNotification = (): IUseNotification => {
     const { activeNotifications, setActiveNotifications } = useContext(NotificationCtx);
