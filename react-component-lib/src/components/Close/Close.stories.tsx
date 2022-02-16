@@ -9,6 +9,7 @@ export default {
         size: {
             options: ['small', 'normal', 'medium', 'large'],
             control: { type: 'select'},
+            description: 'Close size',
         },
     }
 } as ComponentMeta<typeof Close>;
