@@ -3,10 +3,8 @@ import 'animate.css';
 
 const App: React.FC = () => {
     return (
-        <div>
-            Appp
-        </div>
-   );
+        <div></div>
+    );
 };
 
 export default App;

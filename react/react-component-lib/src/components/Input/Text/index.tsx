@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, forwardRef, ForwardedRef } from 'react';
 import classNames from 'classnames/bind';
 
 import { ThemeColors, ThemeSizes } from 'theme';
@@ -7,7 +7,7 @@ interface IInput {
     value: string;
     onChange: (v: string) => void;
     debounced?: boolean;
-    color?: ThemeColors;
+    color?: ThemeColors | '';
     size?: ThemeSizes;
     type?: 'text' | 'password' | 'email' | 'tel';
     isRounded?: boolean;
@@ -21,23 +21,25 @@ interface IInput {
     error?: string;
 };
 
-const InputText: React.FC<
-    IInput & React.InputHTMLAttributes<HTMLInputElement>
-> = ({
-    value,
-    onChange,
-    debounced = false,
-    color = '',
-    size = 'normal',
-    type = 'text',
-    placeholder = '',
-    isRounded = false,
-    disabled = false,
-    isLoading = false,
-    ...rest
-}) => {
+const InputText = forwardRef((
+    {
+        value,
+        onChange,
+        label = '',
+        error = '',
+        debounced = false,
+        color = '',
+        size = 'normal',
+        type = 'text',
+        placeholder = '',
+        isRounded = false,
+        disabled = false,
+        isLoading = false,
+        ...rest
+    }: IInput,
+    ref: ForwardedRef<any>) => {
     const [_value, _setValue] = useState('');
-    const timeoutId = useRef<number>(0);
+    const timeoutId = useRef<any>();
     const inputClasses = classNames({
         'input': true,
         [`is-${color}`]: color,
@@ -74,17 +76,22 @@ const InputText: React.FC<
     }, [_value]);
 
     return (
-        <div className={controlClasses}>
-            <input
-                value={_value}
-                onChange={(e) => _setValue(e.target.value)}
-                className={inputClasses}
-                type={type}
-                placeholder={placeholder}
-                disabled={disabled || isLoading}
-                {...rest} />
+        <div className="field">
+            {label && (<label className="label">{label}</label>)}
+            <div className={controlClasses}>
+                <input
+                    ref={ref}
+                    value={_value}
+                    onChange={(e) => _setValue(e.target.value)}
+                    className={inputClasses}
+                    type={type}
+                    placeholder={placeholder}
+                    disabled={disabled || isLoading}
+                    {...rest} />
+            </div>
+            {error && (<p className="help is-danger">{error}</p>)}
         </div>
     );
-};
+}) as React.FC<IInput>;
 
 export default InputText;
