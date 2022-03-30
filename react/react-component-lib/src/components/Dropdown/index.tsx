@@ -32,8 +32,8 @@ const Dropdown: React.FC<IDropdown> = ({
   const DropdownClasses = classNames({
     dropdown: true,
     [`is-${click}`]: !!click,
-    "is-right": isRight,
-    "is-up": isUp,
+    "is-right": !!isRight,
+    "is-up": !!isUp,
   });
   const [isVisible, setIsVisible] = useState(false);
   const elRef = useRef<any>(null);
